@@ -19,12 +19,12 @@ public static class SpeakerEndpoints
         .WithName("GetAllSpeakers")
         .Produces<List<ConferenceDTO.Speaker>>(StatusCodes.Status200OK);
 
-        routes.MapGet("/api/Speaker/{id}", async (int Id, ApplicationDbContext db) =>
+        routes.MapGet("/api/Speaker/{id}", async (int id, ApplicationDbContext db) =>
         {
             return await db.Speakers.AsNoTracking()
                             .Include(s => s.SessionSpeakers)
                             .ThenInclude(ss => ss.Session)
-                            .SingleOrDefaultAsync(s => s.Id == Id)
+                            .SingleOrDefaultAsync(s => s.Id == id)
                 is Speaker model
                     ? Results.Ok(model.MapSpeakerResponse())
                     : Results.NotFound();

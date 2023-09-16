@@ -27,5 +27,6 @@ app.UseHttpsRedirection();
 app.MapSpeakerEndpoints();
 app.MapAttendeeEndpoints();
 app.MapSessionEndpoints();
+app.MapSearchEndpoints();
 
 app.Run();
